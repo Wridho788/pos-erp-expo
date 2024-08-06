@@ -1,0 +1,39 @@
+# ERP Point of Sales
+
+ERP Point of Sales adalah aplikasi mobile berbasis tablet yang dirancang untuk mengelola dan memproses transaksi penjualan. Aplikasi ini menawarkan fitur-fitur seperti dashboard, manajemen order, daftar transaksi, inventaris, pengelolaan cash in/out, keanggotaan, laporan, absensi, dan pengaturan.
+
+## Persyaratan
+
+Sebelum memulai, pastikan Anda memenuhi persyaratan berikut:
+
+- Node.js (v18 atau lebih baru)
+- Expo CLI (v48 atau lebih baru)
+- Yarn atau npm (manajer paket)
+
+## Instalasi
+
+Ikuti langkah-langkah berikut untuk menginstal dan menjalankan aplikasi:
+
+1. **Clone Repositori**
+
+   ```sh
+   git clone https://github.com/username/repository.git
+   cd repository```
+
+2. **Install Dependensi**
+
+Jika Anda menggunakan npm:
+```npm install```
+ Atau jika Anda menggunakan Yarn:
+``` yarn install ```
+
+3. **Jalankan Aplikasi**
+Untuk memulai aplikasi di mode pengembangan:
+
+```expo start```
+
+Ikuti petunjuk yang ditampilkan di terminal untuk menjalankan aplikasi di emulator atau perangkat fisik.
+
+Penulis
+
+`https://https://github.com/Wridho788/pos-erp-expo.git`

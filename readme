@@ -1,4 +1,4 @@
-# ERP Point of Sales
+# ERP Point of Sales #
 
 ERP Point of Sales adalah aplikasi mobile berbasis tablet yang dirancang untuk mengelola dan memproses transaksi penjualan. Aplikasi ini menawarkan fitur-fitur seperti dashboard, manajemen order, daftar transaksi, inventaris, pengelolaan cash in/out, keanggotaan, laporan, absensi, dan pengaturan.
 
@@ -16,21 +16,29 @@ Ikuti langkah-langkah berikut untuk menginstal dan menjalankan aplikasi:
 
 1. **Clone Repositori**
 
-   ```sh
+   ```
    git clone https://github.com/username/repository.git
-   cd repository```
+   cd repository
+   ```
 
 2. **Install Dependensi**
 
 Jika Anda menggunakan npm:
-```npm install```
+```
+npm install
+```
+
  Atau jika Anda menggunakan Yarn:
-``` yarn install ```
+``` 
+yarn install
+ ```
 
 3. **Jalankan Aplikasi**
-Untuk memulai aplikasi di mode pengembangan:
+sUntuk memulai aplikasi di mode pengembangan:
 
-```expo start```
+```
+expo start
+```
 
 Ikuti petunjuk yang ditampilkan di terminal untuk menjalankan aplikasi di emulator atau perangkat fisik.
 

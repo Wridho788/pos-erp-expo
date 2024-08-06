@@ -1,52 +1,44 @@
-import { useState, useEffect } from 'react';
+import create from 'zustand';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// Hook untuk mengatur autentikasi
-const useAuth = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+interface AuthState {
+  isAuthenticated: boolean;
+  login: (token: string) => Promise<void>;
+  logout: () => Promise<void>;
+}
 
-  useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        // Ambil status autentikasi dari AsyncStorage
-        const userToken = await AsyncStorage.getItem('userToken');
-        if (userToken) {
-          setIsAuthenticated(true);
-        } else {
-          setIsAuthenticated(false);
-        }
-      } catch (error) {
-        console.error('Failed to check authentication status', error);
-        setIsAuthenticated(false);
-      }
-    };
-
-    checkAuth();
-  }, []);
-
-  const login = async (token: string) => {
+const useAuthStore = create<AuthState>((set) => ({
+  isAuthenticated: false,
+  login: async (token: string) => {
     try {
       await AsyncStorage.setItem('userToken', token);
-      setIsAuthenticated(true);
+      set({ isAuthenticated: true });
     } catch (error) {
       console.error('Failed to login', error);
     }
-  };
-
-  const logout = async () => {
+  },
+  logout: async () => {
     try {
       await AsyncStorage.removeItem('userToken');
-      setIsAuthenticated(false);
+      set({ isAuthenticated: false });
     } catch (error) {
       console.error('Failed to logout', error);
     }
-  };
+  },
+}));
 
-  return {
-    isAuthenticated,
-    login,
-    logout,
-  };
+// Check authentication status on initialization
+const checkAuth = async () => {
+  try {
+    const userToken = await AsyncStorage.getItem('userToken');
+    useAuthStore.setState({ isAuthenticated: !!userToken });
+  } catch (error) {
+    console.error('Failed to check authentication status', error);
+    useAuthStore.setState({ isAuthenticated: false });
+  }
 };
 
-export default useAuth;
+// Run checkAuth on initialization
+checkAuth();
+
+export default useAuthStore;

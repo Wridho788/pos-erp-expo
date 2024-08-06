@@ -3,7 +3,6 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from '../screens/Auth/LoginScreen/LoginScreen';
 import RegisterScreen from '../screens/Auth/RegisterScreen/RegisterScreen';
-// Import layar lainnya sesuai kebutuhan
 
 const Stack = createStackNavigator();
 

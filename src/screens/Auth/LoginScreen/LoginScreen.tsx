@@ -1,54 +1,46 @@
-import React, { useState } from 'react';
-import styled from 'styled-components/native';
-import useAuthStore from '../../../hooks/useAuth';
-
-const Container = styled.View`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-  padding: 16px;
-`;
-
-const Title = styled.Text`
-  font-size: 24px;
-  margin-bottom: 16px;
-  color: ${(props) => props.theme.colors.primary};
-`;
-
-const Input = styled.TextInput`
-  width: 100%;
-  padding: 8px;
-  border-color: ${(props) => props.theme.colors.border};
-  border-width: 1px;
-  margin-bottom: 16px;
-  font-size: 16px;
-`;
-
-const Button = styled.Button``;
-
+import React, { useState } from "react";
+import { Container, Card, Title, Subtitle } from "./style";
+import ButtonWithText from "../../../components/Button/ButtonWithText";
+import InputText from "../../../components/InputText/InputText";
+import { useAuthStore } from "../../../store/store"; // Import store auth dari zustand
 const LoginScreen = ({ navigation }: { navigation: any }) => {
-  const [username, setUsername] = useState('');
-  const { login, isAuthenticated } = useAuthStore();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const { login } = useAuthStore(); // Ambil fungsi login dari zustand store
 
-  const handleLogin = async () => {
-    await login(username); // Login with username (use token or other method as needed)
-    if (isAuthenticated) {
-      navigation.navigate('Home'); // Navigate to HomeScreen after login
+  const handleLogin = () => {
+    // Logika login - misalnya, jika email dan password tidak kosong
+    if (username && password) {
+      // Simulasi login dan menyimpan token
+      login("dummy-token"); // Ganti dengan token yang sesuai
+    } else {
+      // Tampilkan pesan error jika perlu
+      alert("Please enter both email and password");
     }
   };
 
   return (
     <Container>
-      <Title>Login</Title>
-      <Input
-        placeholder="Enter username"
-        value={username}
-        onChangeText={setUsername}
-      />
-      <Button title="Login" onPress={handleLogin} />
+      <Card>
+        <Title>Welcome</Title>
+        <Subtitle>Login below to access your account</Subtitle>
+        <InputText
+          placeholder="Enter username"
+          value={username}
+          onChangeText={setUsername}
+        />
+
+        <InputText
+          isPassword={true} // Menandakan input adalah password
+          value={password}
+          onChangeText={setPassword}
+          placeholder="Password"
+        />
+
+        <ButtonWithText text="Sign in" onPress={handleLogin} />
+      </Card>
     </Container>
   );
 };
-
 
 export default LoginScreen;

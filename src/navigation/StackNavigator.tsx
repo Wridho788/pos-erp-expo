@@ -9,9 +9,7 @@ const Stack = createStackNavigator();
 const StackNavigator: React.FC = () => {
   return (
     <Stack.Navigator initialRouteName="Login">
-      <Stack.Screen name="Login" component={LoginScreen} />
-      <Stack.Screen name="Register" component={RegisterScreen} />
-      {/* Tambahkan layar lainnya */}
+      <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }}/>
     </Stack.Navigator>
   );
 }

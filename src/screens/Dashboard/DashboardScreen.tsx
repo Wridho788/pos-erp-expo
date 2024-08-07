@@ -1,7 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
-import useAuthStore from '../../hooks/useAuth';
+import {useAuthStore} from '../../store/store';
 
 const Container = styled.View`
   flex: 1;
@@ -37,13 +36,5 @@ const DashboardScreen: React.FC = ({ navigation }: { navigation: any }) => {
     </Container>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 export default DashboardScreen;

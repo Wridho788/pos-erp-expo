@@ -1,17 +1,28 @@
 import create from 'zustand';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-interface State {
-  user: string | null;
-  setUser: (user: string | null) => void;
-  isLoggedIn: boolean;
-  setLoggedIn: (status: boolean) => void;
+interface AuthState {
+  isAuthenticated: boolean;
+  login: (token: string) => void;
+  logout: () => void;
 }
 
-const useStore = create<State>((set) => ({
-  user: null,
-  setUser: (user) => set({ user, isLoggedIn: !!user }),
-  isLoggedIn: false,
-  setLoggedIn: (status) => set({ isLoggedIn: status }),
+export const useAuthStore = create<AuthState>((set) => ({
+  isAuthenticated: false,
+  login: async (token: string) => {
+    try {
+      await AsyncStorage.setItem('userToken', token);
+      set({ isAuthenticated: true });
+    } catch (error) {
+      console.error('Failed to login', error);
+    }
+  },
+  logout: async () => {
+    try {
+      await AsyncStorage.removeItem('userToken');
+      set({ isAuthenticated: false });
+    } catch (error) {
+      console.error('Failed to logout', error);
+    }
+  },
 }));
-
-export default useStore;

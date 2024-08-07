@@ -1,21 +1,16 @@
 //* Menentukan navigasi berdasarkan status autentikasi.
 import React from 'react';
-import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import StackNavigator from './StackNavigator';
 import DrawerNavigator from './DrawerNavigator';
-import  useAuth  from '../hooks/useAuth'; // Contoh hook untuk mengatur autentikasi
-
-// const Drawer = createDrawerNavigator();
+import { useAuthStore } from '../store/store'; // Import store auth dari zustand
 
 const AppNavigator: React.FC = () => {
-  const { isAuthenticated } = useAuth(); // Contoh pengaturan autentikasi
+  const { isAuthenticated } = useAuthStore(); // Ambil status autentikasi dari zustand store
 
   return (
     <NavigationContainer>
       {isAuthenticated ? (
-        //  <StackNavigator />
-
         <DrawerNavigator />
       ) : (
         <StackNavigator />

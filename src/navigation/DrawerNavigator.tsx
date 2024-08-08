@@ -10,8 +10,8 @@ import CashScreen from "../screens/Cash/CashScreen";
 import MembershipScreen from "../screens/Membership/MembershipScreen";
 import ReportScreen from "../screens/Report/ReportScreen";
 import AttendanceScreen from "../screens/Attendance/AttendanceScreen";
-import SettingsScreen from "../screens/Settings/SettingsScreen";
 import CustomDrawerContent from './CustomNavigator'; // Import custom drawer content
+import SettingsScreen from '../screens/Settings/SettingsScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -26,7 +26,7 @@ const DrawerNavigator: React.FC = () => {
       drawerContent={(props) => <CustomDrawerContent {...props} />} 
     >
       <Drawer.Screen
-        name="Dashboard"
+        name="Home"
         component={DashboardScreen}
         options={{
           headerShown: false,
@@ -51,7 +51,7 @@ const DrawerNavigator: React.FC = () => {
          }}
       />
       <Drawer.Screen
-        name="Transaction"
+        name="Transactions"
         component={TransactionScreen}
         options={{ headerShown: false,
           drawerIcon: () => (
@@ -75,7 +75,7 @@ const DrawerNavigator: React.FC = () => {
          }}
       />
       <Drawer.Screen
-        name="Cash"
+        name="Cash Flow"
         component={CashScreen}
         options={{ headerShown: false, 
           drawerIcon: () => (
@@ -122,18 +122,18 @@ const DrawerNavigator: React.FC = () => {
           ),
          }}
       />
-      {/* <Drawer.Screen
+     <Drawer.Screen
         name="Settings"
         component={SettingsScreen}
-        options={{ headerShown: false,
+        options={{
           drawerIcon: () => (
             <Image
               source={require("../../assets/image/settings.png")}
               style={{ width: 24, height: 24 }}
             />
           ),
-         }}
-      /> */}
+        }}
+      />
     </Drawer.Navigator>
   );
 };

@@ -10,11 +10,13 @@ const AppNavigator: React.FC = () => {
 
   return (
     <NavigationContainer>
-      {isAuthenticated ? (
+              <DrawerNavigator />
+
+      {/* {isAuthenticated ? (
         <DrawerNavigator />
       ) : (
         <StackNavigator />
-      )}
+      )} */}
     </NavigationContainer>
   );
 }

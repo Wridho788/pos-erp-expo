@@ -1,40 +1,65 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { ScrollView, View } from 'react-native';
 import styled from 'styled-components/native';
-import {useAuthStore} from '../../store/store';
+import HeaderSection from './components/Header/Header';
+import { useDashboardStore } from '../../store/dashboardStore';
+import { Container } from './components/Header/styles'; // Import styled components
 
-const Container = styled.View`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-  padding: 16px;
-`;
+const DashboardScreen: React.FC = () => {
+  const { customers, orders, income, expenses, averageSales, fetchDashboardData } = useDashboardStore(state => ({
+    customers: state.customers,
+    orders: state.orders,
+    income: state.income,
+    expenses: state.expenses,
+    averageSales: state.averageSales,
+    fetchDashboardData: state.fetchDashboardData,
+  }));
 
-const Title = styled.Text`
-  font-size: 24px;
-  margin-bottom: 16px;
-  color: ${(props) => props.theme.colors.primary};
-`;
-
-const Button = styled.Button``;
-const DashboardScreen: React.FC = ({ navigation }: { navigation: any }) => {
-  const { isAuthenticated, logout } = useAuthStore();
-
-  if (!isAuthenticated) {
-    navigation.navigate('Login'); // Navigate to LoginScreen if not authenticated
-    return null;
-  }
-
-  const handleLogout = async () => {
-    await logout();
-    navigation.navigate('Login'); // Navigate to LoginScreen after logout
-  };
+  useEffect(() => {
+    fetchDashboardData();
+  }, [fetchDashboardData]);
 
   return (
-    <Container>
-      <Title>Welcome</Title>
-      <Button title="Logout" onPress={handleLogout} />
-    </Container>
+    <ScrollView>
+      <ContainerHeader>
+        <HeaderSection
+          icon={require('../../../assets/image/Customer-ic.png')}
+          title="Customers"
+          total={customers}
+        />
+        <HeaderSection
+          icon={require('../../../assets/image/Order-dashboard.png')}
+          title="Orders"
+          total={orders}
+        />
+        <HeaderSection
+          icon={require('../../../assets/image/income-ic.png')}
+          title="Income"
+          total={income}
+          isCurrency 
+        />
+        <HeaderSection
+          icon={require('../../../assets/image/Expenses-ic.png')}
+          title="Expenses"
+          total={expenses}
+          isCurrency 
+        />
+        <HeaderSection
+          icon={require('../../../assets/image/sales-graph-ic.png')}
+          title="Average Sales"
+          total={averageSales}
+        />
+      </ContainerHeader>
+    </ScrollView>
   );
 };
+
+const ContainerHeader = styled.View`
+flex-direction: row;
+padding: 10px;
+margin: 10px;
+background: white;
+radius: 8px
+`
 
 export default DashboardScreen;

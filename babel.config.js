@@ -6,6 +6,7 @@ module.exports = {
     "@babel/plugin-transform-private-methods",
     "@babel/plugin-transform-private-property-in-object",
     "react-native-reanimated/plugin",
-    "babel-plugin-styled-components"
+    "babel-plugin-styled-components",
+    '@babel/plugin-transform-template-literals'
   ],
 };
